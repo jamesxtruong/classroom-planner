@@ -1,7 +1,8 @@
 # main.py
 from classroom import Classroom, Computer_lab, Lecture, Remote
+from tables import Table, Tree 
 import numpy as np 
-# James Truong   CS302	    3-13-2023
+# James Truong   CS302	    3-15-2023
 # Program 4/5	Classroom Planner Program
 
 """ 
@@ -68,7 +69,7 @@ def main():
             print("... Exiting the menu")
 
     # Create Classroom objects 
-    a_class = Classroom(1, 5, "The Base Class", "Basic Tech", True) # Parameterized base class
+    a_class = Classroom("FAB 000", 1, 5, "The Base Class", "Basic Tech", True) # Parameterized base class
     b_class = Classroom()       # Default base class classroom
     c_class = Computer_lab()    # Sub class computer lab classroom
     d_class = Lecture()         # Sub class lecture classroom
