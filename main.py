@@ -1,8 +1,8 @@
 # main.py
 from classroom import Classroom, Computer_lab, Lecture, Remote
-from tables import Table, Tree 
+from tables import Classroom_list, Tree 
 import numpy as np 
-# James Truong   CS302	    3-15-2023
+# James Truong   CS302	    3-22-2023
 # Program 4/5	Classroom Planner Program
 
 """ 

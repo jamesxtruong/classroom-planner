@@ -1,7 +1,7 @@
 # classroom.py
 import numpy as np 
 import os 
-# James Truong   CS302   3-15-2023
+# James Truong   CS302   3-22-2023
 # Program 4/5    Classroom Planner Program 
 
 """
@@ -98,7 +98,7 @@ class Classroom:                # Base class
     def check_full(self):                       # Check if classroom is full
         return self._occupants == self._capacity 
 
-        # Operator overloading to compare availablility (occupants to capacity)
+    # Operator overloading to compare availablility (occupants to capacity)
     def __lt__(self, op2):                      # Less occupants than classroom capacity allowed
         return self._occupants < op2._occupants 
 
@@ -154,7 +154,10 @@ class Lecture(Classroom):       # Lecture is a sub-class, is a Classroom
     def change_podium(self, podium = None):
         if podium is None:
             podium = input("Enter the number of podiums available for the classroom: ")
-        self._podium = podium 
+        if podium < 0:
+            print("Invalid number")
+        elif podium >= 0:
+            self._podium = podium 
 
 class Remote(Classroom):        # Remote is a sub-class, is a Classroom 
     #def __init__(self):
@@ -174,12 +177,18 @@ class Remote(Classroom):        # Remote is a sub-class, is a Classroom
     def change_webcams(self, webcams = None):
         if webcams is None:
             webcams = input("Enter the number of webcams available for the classroom: ")
-        self._webcams = webcams
+        if webcams < 0:
+            print("Invalid size")
+        elif webcams >= 0:
+            self._webcams = webcams
 
     def change_microphones(self, microphones = None):
         if microphones is None:
             microphones = input("Enter the number of microphones available for the classroom: ")
-        self._microphones = microphones
+        if microphones < 0:
+            print("Invalid size")
+        elif microphones >= 0:
+            self._microphones = microphones 
         #pass 
     
    
