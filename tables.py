@@ -10,58 +10,85 @@ This file contains the class interface(s). To store available classrooms
 and schedule classrooms. The classrooms available to the user are preset in terms
 of what classrooms are available. Classrooms can be displayed, added, and changed.
 """
-class Scheduler:
-    Pass 
+#class Scheduler: # Class to contain menu interface and array of linked list of available classrooms and tree to schedule classrooms 
+        #pass 
+
 # Table (array of linked lists of random classrooms)
 class Classroom_list:
-    def __init__(self):        
+    def __init__(self):      
+        self._num_labs = 8        # 8 computer labs available to book
+        self._num_remote = 6      # 6 remote classrooms available to book
+        self._num_lecture = 20    # 20 lecture classrooms avaialble to book   
         self._array = []
-        for i in range(10):     # Array of linked lists (Classrooms)
+        for i in range(4):     # Array of linked lists (Classrooms)
             self._array.append(Linked_list())
 
-    def setup_classrooms(self): # Function to create set amount of classrooms available 
-            num_labs = 8        # 7 computer labs available to book
-            num_remote = 6      # 5 remote classrooms available to book
-            num_lecture = 20    # 20 lecture classrooms avaialble to book 
+    #def setup_classrooms(self): # Function to create set amount of classrooms available 0
+        #pass
+
+# Linked list node of classroom
+class Node: 
+    def __init__(self, a_classroom, next = None):
+        self._classroom = a_classroom 
+        self._next = next
 
 # Linked list class, list of classrooms
 class Linked_list: 
     def __init__(self):
         self._head = None 
 
-# Linked list node of classroom
-class Node: 
-    def __init__(self, Classroom, next = None):
-        self._Classroom = Classroom 
-        self._next = next
-    
-# 2-3 Tree to schedule and check classes
+    def insert(self, a_classroom):  # Public wrapper
+        new_node = Node(a_classroom)
+
+        if self._head is None:      # Empty list, insert 
+            self._head = new_node
+        else:
+            self._insert(new_node, self._head) # Recursive call
+
+    def _insert(self, new_node, current): # Recursive function to insert
+        if current._next is None:
+            current._next = new_node
+        else:
+            self._insert(new_node, current._next)
+
+    def remove_all(self):       # Function to remove whole list 
+        self._head = None 
+
+    def display(self):                  # Wrapper function to display classroom list
+        self._display(self._head)
+
+    def _display(self, current):        # Recursive function to display classroom list
+        if current is not None:
+            current._classroom.print_info()
+            self._display(current._next) # Recursive call 
+
+# 2-3 Tree to schedule and check classes (IN PROGRESS SWITCHING TO 2-3 IMPLEMENTATION...)
 class Tree:
     def __init__(self):         
         self._root = None
 
-    def insert(self, time, Classroom):      # Public function insert 
+    def insert(self, time, a_classroom):      # Public function insert 
         if self._root is None:              # Empty 
             self._root = Tree_node(time)
-            self._root._classes._head = Node(Classroom)
+            self._root._classes._head = Node(a_classroom)
         else:
             self._insert(time, Classroom, self._root)
 
-    def _insert(self, time, Classroom, current):    # Private wrapper 
+    def _insert(self, time, a_classroom, current):    # Private wrapper 
         if time == current._time:                   # Check if classroom (node) for time already exists 
             current._classes._head = Node(Classroom, current._classes._head)
         elif time < current._time:                  # Go the left is time is less than current
             if current._left is None: 
                 current._left = Tree_node(time)
-                current._left._clases._head = Node(Classroom)
+                current._left._clases._head = Node(a_classroom)
             else:
                 self._insert(time, Classroom, current._left) # Recursive call traverse left
         else:                                       # Time is greater than current, go to right 
             if current._right is None:
                 current._right = Tree_node(time)
-                current._right._classes._head = Node(Classroom)
+                current._right._classes._head = Node(a_classroom)
             else:
-                self._insert(time, Classroom, current._right) # Recursive call traverse right
+                self._insert(time, a_classroom, current._right) # Recursive call traverse right
 
     def display(self):                      # Public wrapper display 
         self._display(self._root)           # Recursive function call to display
@@ -74,7 +101,7 @@ class Tree:
             print(f"Class time: {current._time}") 
             temp = current._classes._head   # Temp pointer to head to traverse classes to print
             while temp is not None:         # Display 
-                temp._Classroom.print_info()
+                temp._classroom.print_info()
                 temp = temp._next           # Iterate 
             self._display(current._right)   # Traverse right tree
 
@@ -84,15 +111,17 @@ class Tree:
 # 2-3 Tree node
 class Tree_node:
     def __init__(self, time):
-        self._time_1 = time
+        self._time_1 = time       # Two data in node 
         self._time_2 = None 
-        self._classes = Linked_list() # Linked of classrooms in Node 
+        self._classes_1 = Linked_list() # Linked of classrooms in Node 
+        self._classes_2 = Linked_list()
         self._parent = None 
-        self._left = None
-        self._middle = None 
-        self._right = None
-        #self._height = 1
+        self._left = None          # Left child
+        self._middle = None        # Middle child
+        self._right = None         # Right child
+        #self._height = 1   
     
+
         # Array of linked lists 
         #self._classrooms = np.empty(5, dtype=object)
         #for i in range(5):
@@ -123,5 +152,4 @@ class Tree_node:
                 #a_room.change_microphones(microphones)
                 #a_room.change_webcames(webcams)
             #self._classrooms[random.randint(0, 4).append(a_room)]
-        #pass
-    #pass
+      

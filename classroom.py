@@ -23,7 +23,7 @@ class Classroom:                # Base class
         self._booked = booked                   # By default every classroom is not booked 
 
     def print_info(self):        # Print information about classroom
-        print("\nClassroom info: ")     # Print header
+        print("Classroom info: ")     # Print header
         print(f"Room number: {self._room_num}")             # Room num / name
         print(f"Occupants: {self._occupants} / Capacity: {self._capacity}") # Occupants / capacity
         #print(f"Capacity: {self._capacity}")
