@@ -1,7 +1,7 @@
 # Classroom Planner Program
 
 **Created by:** James Truong for CS302 Winter 2023
-**Program:** #4/#5
+**Program:** #4/5
 
 ---
 
